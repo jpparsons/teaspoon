@@ -32,6 +32,7 @@ module Teaspoon
       protected
 
       def run(*args, &block)
+        log("ARGS: #{*args}")
         IO.popen([executable, *args].join(" ")) { |io| io.each(&block) }
 
         unless $?.nil? || $?.success?
