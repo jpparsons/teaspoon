@@ -12,7 +12,9 @@ module Teaspoon
     end
 
     def process(line)
+      STDOUT.print("LINE: #{line}\n")
       if result = result_from_line(line)
+        STDOUT.print("RESULT: #{result}\n")
         return notify_formatters(result.type, result)
       end
       notify_formatters("console", line) unless Teaspoon.configuration.suppress_log
@@ -32,6 +34,7 @@ module Teaspoon
 
     def result_from_line(line)
       json = JSON.parse(line)
+      STDOUT.print("JSON: #{json}\n")
       return false unless json && json["_teaspoon"] && json["type"]
       json["original_json"] = line
       return result_from_json(json)
