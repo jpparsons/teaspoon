@@ -52,6 +52,7 @@ module Teaspoon
 
       log("Teaspoon running #{suite} suite at #{base_url_for(suite)}")
       runner = Teaspoon::Runner.new(suite)
+      log("Run specs using runner #{runner}")
       driver.run_specs(runner, url_for(suite))
       raise Teaspoon::Failure if Teaspoon.configuration.fail_fast && runner.failure_count > 0
       runner.failure_count
